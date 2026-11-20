@@ -11,7 +11,7 @@ on:
 # tarefas dentro da pipeline - jobs
 jobs:
     #nome do job
-    unit-tests:
+    cypress-e2e-tests:
         #máquina onde vai rodar o job
         runs-on: ubuntu-Latest
         steps:
