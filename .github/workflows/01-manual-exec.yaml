@@ -28,7 +28,7 @@ jobs:
               run: npm install
 
             # executar os testes unitários
-            - name: Executando testes de interface
+            - name: Executando testes E2E
               run: npx cypress run
 
             # publica relatório de testes
@@ -37,4 +37,4 @@ jobs:
               if: ${{ always() }}
               with:
                 path: .cypress/reports/html
-                name: Relatório de Testes Unitários
+                name: Relatório de Testes E2E
