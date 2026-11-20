@@ -1,0 +1,40 @@
+# CI de Nível 01, disparo manual através de clique
+
+#nome da pipeline
+name: 'Execução Manual'
+
+# Gatilhos / Triggers - regras de disparo
+# Gatilho manual = workFlow dispath
+
+on:
+    workflow_dispatch:
+# tarefas dentro da pipeline - jobs
+jobs:
+    #nome do job
+    unit-tests:
+        #máquina onde vai rodar o job
+        runs-on: ubuntu-Latest
+        steps:
+            # clone do projeto
+            - uses: actions/checkout@v4
+
+            # instalação do node
+            - uses: actions/setup-node@v4
+              with:
+                node-version: 22.x
+
+            # instalação das dependencias
+            - name: Instalando Dependências
+              run: npm install
+
+            # executar os testes unitários
+            - name: Executando testes de interface
+              run: npx cypress run
+
+            # publica relatório de testes
+            - name: Salvando relatórios de testes
+              uses: actions/upload-artifact@v4
+              if: ${{ always() }}
+              with:
+                path: ./reports/html
+                name: Relatório de Testes Unitários
